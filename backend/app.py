@@ -28,5 +28,17 @@ def get_filmes():
     conn.close()
     return jsonify(filmes)
 
+@app.route('/api/filmes-disponiveis', methods=['GET'])
+def listar_filmes_disponiveis():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('''
+        SELECT * FROM filmes
+        WHERE quantidade_disponivel > 0
+    ''')
+    filmes = cursor.fetchall()
+    conn.close()
+    return jsonify(filmes)
+
 if __name__ == '__main__':
     app.run(debug=True)

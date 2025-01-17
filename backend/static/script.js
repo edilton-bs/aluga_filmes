@@ -1,20 +1,15 @@
-// Função para buscar e exibir os filmes
-async function listarFilmes() {
+// Função para listar filmes disponíveis automaticamente
+async function listarFilmesDisponiveis() {
     try {
-        // Faz a requisição GET para o endpoint do backend
-        const response = await fetch('http://127.0.0.1:5000/api/filmes');
+        const response = await fetch('http://127.0.0.1:5000/api/filmes-disponiveis');
         if (!response.ok) {
-            throw new Error('Erro ao buscar filmes!');
+            throw new Error('Erro ao buscar filmes disponíveis!');
         }
         const filmes = await response.json();
 
-        // Seleciona o contêiner onde os filmes serão exibidos
         const filmesContainer = document.getElementById('filmes');
+        filmesContainer.innerHTML = ''; // Limpa o contêiner antes de exibir
 
-        // Limpa o contêiner antes de adicionar novos filmes
-        filmesContainer.innerHTML = '';
-
-        // Adiciona os filmes ao contêiner
         filmes.forEach(filme => {
             const filmeElement = document.createElement('div');
             filmeElement.innerHTML = `
@@ -26,8 +21,10 @@ async function listarFilmes() {
         });
     } catch (error) {
         console.error(error.message);
+        const filmesContainer = document.getElementById('filmes');
+        filmesContainer.innerHTML = `<p style="color: red;">${error.message}</p>`;
     }
 }
 
-// Adiciona um evento de clique ao botão
-document.getElementById('listar-filmes').addEventListener('click', listarFilmes);
+// Executa a função automaticamente ao carregar a página
+document.addEventListener('DOMContentLoaded', listarFilmesDisponiveis);
