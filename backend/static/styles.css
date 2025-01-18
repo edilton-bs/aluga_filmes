@@ -7,3 +7,80 @@
     margin: 0;
     color: #333;
 }
+
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    background-color: #575757;
+    color: white;
+}
+
+.navbar svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+    margin-right: 5px;
+}
+
+/* Modal */
+.modal {
+    display: none; /* Começa escondido */
+    position: fixed; /* Fixa o modal na posição desejada */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupa toda a largura da página */
+    height: 100%; /* Ocupa toda a altura da página */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    display: flex; /* Centraliza o modal */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Coloca o modal acima de todo o conteúdo */
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background: white; /* Fundo branco para o modal */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    width: 90%; /* Largura do modal */
+    max-width: 400px; /* Limita o tamanho máximo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar o modal */
+    position: relative; /* Necessário para o botão de fechar */
+    z-index: 1001; /* Para o conteúdo aparecer acima do fundo */
+}
+
+/* Botão para fechar */
+.fechar {
+    position: absolute; /* Fixa o botão no canto superior direito */
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+.fechar:hover {
+    color: red; /* Muda a cor ao passar o mouse */
+}

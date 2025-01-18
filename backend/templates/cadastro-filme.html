@@ -16,21 +16,8 @@
     </div>
     
 
+    <!-- Área para exibir os filmes -->
     <div id="filmes"></div>
-
-<!-- Modal para Aluguel -->
-<div id="aluguel-modal" class="modal">
-    <div class="modal-content">
-        <span id="fechar-modal" class="fechar">&times;</span>
-        <h2 id="modal-titulo"></h2>
-        <form id="form-aluguel">
-            <input type="hidden" id="filme-id" name="filme_id">
-            <label for="usuario">Usuário:</label>
-            <input type="text" id="usuario" name="usuario" placeholder="Digite o nome do usuário" required>
-            <button type="submit">Confirmar Aluguel</button>
-        </form>
-    </div>
-</div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
