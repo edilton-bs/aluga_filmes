@@ -40,7 +40,7 @@ def get_filmes():
 def alugar_filme():
     data = request.get_json()
     filme_id = data['filme_id']
-    usuario = data['usuario']
+    usuario_id = data['usuario']  # Recebe o ID do usuário do dropdown
 
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -60,7 +60,7 @@ def alugar_filme():
     cursor.execute('''
         INSERT INTO emprestimos (id_usuario, id_filme, data_emprestimo, status)
         VALUES (%s, %s, CURDATE(), 'emprestado')
-    ''', (usuario, filme_id))
+    ''', (usuario_id, filme_id))
     conn.commit()
     conn.close()
 
@@ -78,6 +78,17 @@ def listar_filmes_disponiveis():
     filmes = cursor.fetchall()
     conn.close()
     return jsonify(filmes)
+
+
+@app.route('/api/usuarios', methods=['GET'])
+def listar_usuarios():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('SELECT id, nome FROM usuarios')  # Busca apenas o ID e o nome dos usuários
+    usuarios = cursor.fetchall()
+    conn.close()
+    return jsonify(usuarios)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

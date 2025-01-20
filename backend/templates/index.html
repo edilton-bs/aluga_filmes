@@ -25,10 +25,13 @@
         <h2 id="modal-titulo"></h2>
         <form id="form-aluguel">
             <input type="hidden" id="filme-id" name="filme_id">
-            <label for="usuario">Usuário:</label>
-            <input type="text" id="usuario" name="usuario" placeholder="Digite o nome do usuário" required>
+            <label for="usuario">Selecione o Usuário:</label>
+            <select id="usuario" name="usuario" required>
+                <!-- As opções serão preenchidas dinamicamente -->
+            </select>
             <button type="submit">Confirmar Aluguel</button>
         </form>
+        
     </div>
 </div>
 

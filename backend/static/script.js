@@ -36,16 +36,37 @@ async function listarFilmesDisponiveis() {
     }
 }
 
-// Função para abrir o modal de aluguel
-function abrirModalAluguel(filmeId, filmeTitulo) {
+async function abrirModalAluguel(filmeId, filmeTitulo) {
     const modal = document.getElementById('aluguel-modal');
     const modalTitulo = document.getElementById('modal-titulo');
     const modalFilmeId = document.getElementById('filme-id');
+    const usuarioDropdown = document.getElementById('usuario');
 
     modalTitulo.textContent = `Alugar: ${filmeTitulo}`;
     modalFilmeId.value = filmeId;
 
-    modal.style.display = 'block';
+    try {
+        // Faz uma requisição para buscar os usuários
+        const response = await fetch('http://127.0.0.1:5000/api/usuarios');
+        if (!response.ok) {
+            throw new Error('Erro ao buscar usuários!');
+        }
+        const usuarios = await response.json();
+
+        // Preenche o dropdown com os usuários
+        usuarioDropdown.innerHTML = ''; // Limpa as opções existentes
+        usuarios.forEach(usuario => {
+            const option = document.createElement('option');
+            option.value = usuario.id;
+            option.textContent = usuario.nome;
+            usuarioDropdown.appendChild(option);
+        });
+    } catch (error) {
+        console.error(error.message);
+        usuarioDropdown.innerHTML = `<option value="">Erro ao carregar usuários</option>`;
+    }
+
+    modal.style.display = 'block'; // Mostra o modal
 }
 
 // Fechar o modal de aluguel
@@ -85,3 +106,5 @@ document.getElementById('form-aluguel').addEventListener('submit', async (event)
         alert('Erro ao realizar o aluguel!');
     }
 });
+
+document.getElementById('aluguel-modal').style.display = 'none';
