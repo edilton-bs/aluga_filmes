@@ -1,4 +1,30 @@
 // Função para listar filmes disponíveis automaticamente
+document.addEventListener('DOMContentLoaded', () => {
+    // Garante que todos os modais estão escondidos ao carregar a página
+    document.getElementById('modal-cadastrar-filme').style.display = 'none';
+    document.getElementById('modal-cadastrar-usuario').style.display = 'none';
+
+    // Abrir modais
+    document.getElementById('btn-cadastrar-filme').addEventListener('click', () => {
+        document.getElementById('modal-cadastrar-filme').style.display = 'flex';
+    });
+
+    document.getElementById('btn-cadastrar-usuario').addEventListener('click', () => {
+        document.getElementById('modal-cadastrar-usuario').style.display = 'flex';
+    });
+
+    // Fechar modais
+    document.getElementById('fechar-modal-filme').addEventListener('click', () => {
+        document.getElementById('modal-cadastrar-filme').style.display = 'none';
+    });
+
+    document.getElementById('fechar-modal-usuario').addEventListener('click', () => {
+        document.getElementById('modal-cadastrar-usuario').style.display = 'none';
+    });
+});
+
+
+
 async function listarFilmesDisponiveis() {
     try {
         const response = await fetch('http://127.0.0.1:5000/api/filmes-disponiveis');
@@ -108,3 +134,68 @@ document.getElementById('form-aluguel').addEventListener('submit', async (event)
 });
 
 document.getElementById('aluguel-modal').style.display = 'none';
+
+
+
+
+// Abrir e fechar os modais
+document.getElementById('btn-cadastrar-filme').addEventListener('click', () => {
+    document.getElementById('modal-cadastrar-filme').style.display = 'flex';
+});
+
+document.getElementById('fechar-modal-filme').addEventListener('click', () => {
+    document.getElementById('modal-cadastrar-filme').style.display = 'none';
+});
+
+document.getElementById('btn-cadastrar-usuario').addEventListener('click', () => {
+    document.getElementById('modal-cadastrar-usuario').style.display = 'flex';
+});
+
+document.getElementById('fechar-modal-usuario').addEventListener('click', () => {
+    document.getElementById('modal-cadastrar-usuario').style.display = 'none';
+});
+
+// Cadastrar Filme
+document.getElementById('form-cadastrar-filme').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const titulo = document.getElementById('titulo').value;
+    const genero = document.getElementById('genero').value;
+    const quantidade = document.getElementById('quantidade').value;
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/cadastrar-filme', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ titulo, genero, quantidade })
+        });
+
+        const result = await response.json();
+        alert(result.message);
+        document.getElementById('modal-cadastrar-filme').style.display = 'none';
+    } catch (error) {
+        alert('Erro ao cadastrar filme!');
+    }
+});
+
+// Cadastrar Usuário
+document.getElementById('form-cadastrar-usuario').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/cadastrar-usuario', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, email })
+        });
+
+        const result = await response.json();
+        alert(result.message);
+        document.getElementById('modal-cadastrar-usuario').style.display = 'none';
+    } catch (error) {
+        alert('Erro ao cadastrar usuário!');
+    }
+});

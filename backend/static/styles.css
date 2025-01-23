@@ -46,41 +46,58 @@ body {
 
 /* Modal */
 .modal {
-    display: none; /* Começa escondido */
-    position: fixed; /* Fixa o modal na posição desejada */
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%; /* Ocupa toda a largura da página */
-    height: 100%; /* Ocupa toda a altura da página */
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
-    display: flex; /* Centraliza o modal */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Coloca o modal acima de todo o conteúdo */
+    z-index: 1000;
 }
 
-/* Conteúdo do modal */
 .modal-content {
-    background: white; /* Fundo branco para o modal */
-    padding: 20px; /* Espaçamento interno */
-    border-radius: 10px; /* Bordas arredondadas */
-    width: 90%; /* Largura do modal */
-    max-width: 400px; /* Limita o tamanho máximo */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar o modal */
-    position: relative; /* Necessário para o botão de fechar */
-    z-index: 1001; /* Para o conteúdo aparecer acima do fundo */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    text-align: center;
 }
 
-/* Botão para fechar */
 .fechar {
-    position: absolute; /* Fixa o botão no canto superior direito */
+    position: absolute;
     top: 10px;
-    right: 10px;
+    right: 20px;
     font-size: 20px;
     cursor: pointer;
     color: #333;
 }
 
 .fechar:hover {
-    color: red; /* Muda a cor ao passar o mouse */
+    color: red;
+}
+
+.cadastro-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
 }

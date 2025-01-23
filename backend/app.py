@@ -23,9 +23,9 @@ def index():
 def consulta():
     return render_template('consulta.html')
 
-@app.route('/cadastrar-filme')
+@app.route('/cadastro')
 def cadastra_filme():
-    return render_template('cadastro-filme.html')
+    return render_template('cadastro.html')
 
 @app.route('/api/filmes', methods=['GET'])
 def get_filmes():
@@ -88,6 +88,43 @@ def listar_usuarios():
     usuarios = cursor.fetchall()
     conn.close()
     return jsonify(usuarios)
+
+
+@app.route('/api/cadastrar-filme', methods=['POST'])
+def cadastrar_filme():
+    data = request.get_json()
+    titulo = data['titulo']
+    genero = data['genero']
+    quantidade = data['quantidade']
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO filmes (titulo, genero, quantidade_total, quantidade_disponivel)
+        VALUES (%s, %s, %s, %s)
+    ''', (titulo, genero, quantidade, quantidade))
+    conn.commit()
+    conn.close()
+
+    return jsonify({'message': 'Filme cadastrado com sucesso!'})
+
+@app.route('/api/cadastrar-usuario', methods=['POST'])
+def cadastrar_usuario():
+    data = request.get_json()
+    nome = data['nome']
+    email = data['email']
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO usuarios (nome, email)
+        VALUES (%s, %s)
+    ''', (nome, email))
+    conn.commit()
+    conn.close()
+
+    return jsonify({'message': 'Usuário cadastrado com sucesso!'})
+
 
 
 if __name__ == '__main__':
